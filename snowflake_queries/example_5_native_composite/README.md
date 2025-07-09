@@ -20,7 +20,7 @@ Each query's composite score determines its share of warehouse costs:
 ```sql
 -- Default weighting (customizable)
 composite_score = (execution_time * 0.4) + 
-                  (credits_used * 1000 * 0.4) + 
+                  (credits_used_cloud_services * 1000 * 0.4) + 
                   (bytes_scanned / 1000000 * 0.2)
 ```
 
@@ -38,8 +38,8 @@ CREATE OR REPLACE VIEW OPERATIONS.CLOUDZERO_TELEMETRY.QUERY_COMPOSITE_ALLOCATION
 
 ```sql
 -- Line 30: Adjust composite score weighting
-(execution_time * 0.5) +                    -- Time weight: 50%
-(credits_used_cloud_services * 1000 * 0.3) + -- Credits weight: 30%
+(execution_time * 0.4) +                    -- Time weight: 40%
+(credits_used_cloud_services * 1000 * 0.4) + -- Credits weight: 40%
 (bytes_scanned / 1000000 * 0.2)             -- Data volume weight: 20%
 ```
 

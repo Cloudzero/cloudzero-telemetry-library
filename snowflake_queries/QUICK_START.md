@@ -99,15 +99,6 @@ export GCP_PROJECT_ID="your-project-id"
 
 ## Step 7: Verify Results
 
-Set up hourly execution using your preferred scheduler:
-
-```bash
-# Cron example (runs every hour at minute 30)
-30 * * * * /path/to/python /path/to/shared/handler.py /path/to/example_2_native_time/query_tags_by_time.sql
-```
-
-## Step 7: Verify Results
-
 Check CloudZero dashboard for allocated warehouse costs within 2 hours.
 
 ## Cloud Provider Options

@@ -1,5 +1,5 @@
 -- Copyright (c) 2016-present, CloudZero, Inc. All rights reserved.
--- Licensed under the BSD-style license. See LICENSE file in the project root for full license information.
+-- Licensed under the Apache 2.0 license. See LICENSE file in the project root for full license information.
 
 -- Snowflake Usage-Based Cost Allocation - Native Data Volume Allocation
 -- Allocates warehouse costs by data volume processed using native metadata
