@@ -56,8 +56,27 @@ pip install -r ../shared/requirements.txt
 python ../shared/handler.py query_tags_by_time.sql
 ```
 
-### 5. Schedule Hourly
+### 5. Deploy to Production
 
+#### Cloud Deployment (Recommended)
+
+The handler supports deployment across all major cloud providers:
+
+**AWS**: Lambda functions, ECS tasks, or EC2 instances with AWS Secrets Manager
+**Azure**: Functions, Container Instances, or VMs with Azure Key Vault  
+**Google Cloud**: Cloud Functions, Cloud Run, or Compute Engine with Secret Manager
+**Kubernetes**: CronJob resources with native secrets or external secrets operators
+
+All cloud deployments use the same command: `python shared/handler.py query_tags_by_time.sql`
+
+Configure your cloud provider with:
+- `SECRETS_PROVIDER="aws"` (or "azure", "gcp")
+- Hourly scheduling (recommended: 30 minutes past each hour)
+- Cloud-native secrets management for credentials
+
+See [CLOUD_DEPLOYMENT.md](../CLOUD_DEPLOYMENT.md) for architecture and deployment considerations.
+
+#### Local Scheduling (Development/Testing)
 ```bash
 # Cron example
 30 * * * * /path/to/python /path/to/shared/handler.py /path/to/query_tags_by_time.sql
