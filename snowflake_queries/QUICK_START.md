@@ -45,12 +45,59 @@ CREATE OR REPLACE VIEW OPERATIONS.CLOUDZERO_TELEMETRY.QUERY_EXECUTION_TIME AS
 
 ## Step 5: Run Collection Script
 
+### Local Testing
 ```bash
-# Replace with your chosen example
+# Test connection first
+python shared/handler.py --test-connection example_2_native_time/query_tags_by_time.sql
+
+# Run collection (replace with your chosen example)
 python shared/handler.py example_2_native_time/query_tags_by_time.sql
 ```
 
-## Step 6: Schedule Hourly
+## Step 6: Deploy to Production
+
+### Cloud Deployment (Recommended)
+
+Choose your cloud provider - see [CLOUD_DEPLOYMENT.md](CLOUD_DEPLOYMENT.md) for full details:
+
+#### AWS Lambda
+```bash
+# Set secrets provider
+export SECRETS_PROVIDER="aws"
+export TELEMETRY_SECRETS_ID="cloudzero-api-key"  
+export SNOWFLAKE_SECRETS_ID="snowflake-credentials"
+
+# Deploy as Lambda with EventBridge hourly trigger
+# See CLOUD_DEPLOYMENT.md for complete setup
+```
+
+#### Azure Functions
+```bash
+# Set secrets provider
+export SECRETS_PROVIDER="azure"
+export AZURE_VAULT_URL="https://your-vault.vault.azure.net/"
+
+# Deploy as Function App with Timer trigger
+# See CLOUD_DEPLOYMENT.md for complete setup
+```
+
+#### Google Cloud Functions
+```bash
+# Set secrets provider
+export SECRETS_PROVIDER="gcp"
+export GCP_PROJECT_ID="your-project-id"
+
+# Deploy as Cloud Function with Cloud Scheduler
+# See CLOUD_DEPLOYMENT.md for complete setup
+```
+
+### Local Scheduling (Development/Testing)
+```bash
+# Add to crontab for hourly execution
+30 * * * * /path/to/python /path/to/shared/handler.py /path/to/example_2_native_time/query_tags_by_time.sql
+```
+
+## Step 7: Verify Results
 
 Set up hourly execution using your preferred scheduler:
 
