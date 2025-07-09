@@ -1,4 +1,0 @@
-boto3
-snowflake-connector-python
-simplejson
-toolz
